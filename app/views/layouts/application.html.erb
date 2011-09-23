@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <title><%= content_for?(:title) ? yield(:title) : t('title.header') %></title>
+        <%= stylesheet_link_tag    "application" %>
+        <%= javascript_include_tag "application" %>
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lobster" /> 
+        <%= csrf_meta_tags %>
+        <%= yield(:head) %>
+    </head>
+    <body>
+      <header>
+          <h1>AppName : Tag Line!</h1>
+          <p>Your Application Description!</p>
+      </header>
+      <nav>
+          <ul class="fancyNav">
+            <li id="home"><%= link_to "Home", root_path, :class => "homeIcon" %></li>
+            <% if current_user %>
+            <li><a href="#">Option 1</a></li>
+            <li><a href="#">Option 2</a></li>
+            <li id="logout"><%= link_to "Logout", logout_url %></li>
+            <% else %>
+            <li id="login"><%= link_to "Login", login_url %></li>
+            <li id="signup"><%= link_to "Sign up!", signup_url %></li>
+            <% end %>
+          </ul>
+      </nav>
+      <section id="main">
+        <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        <% end %>
+        <%= content_tag :h3, yield(:title) if show_title? %>
+        <section id="content">
+          <%= yield %>
+        </section>
+      </section>
+      <footer>
+        All the content on this website is copyright of Jais Cheema.
+      </footer>
+    </body>
+</html>

@@ -1,0 +1,17 @@
+#encoding: utf-8
+pb:
+  title:
+    header: "ਖਾਲੀ"
+    description:  "ਇਸ ਵੈਬਸਾਇਟ ਤੇ ਤੁਹਾਡਾ ਸਵਾਗਤ ਹੈ |"
+
+  welcome:
+    header: "ਜੀ ਆਇਆਂ ਨੂੰ"
+    text: "ਇਸ ਵੈਬਸਾਇਟ ਤੇ ਤੁਹਾਡਾ ਸਵਾਗਤ ਹੈ |"
+  
+  flash:
+    logged_in:  "ਲੋਗਿਨ ਸਫਲ਼ ਰਿਹਾ"
+    logged_out:  "ਲੋਗਆਉਟ ਸਫਲ਼ ਰਿਹਾ"
+    signed_up:  "ਹੁਣ ਤੁਸੀ ਇਸ ਵੇਬਸਾਇਟ ਦੇ ਕਾਰਯਕਾਰੀ ਬਣ ਗਏ ਹੋ|"
+    already_login:  "ਤੁਸੀ ਪਿਹਲਾ ਤੋ ਹੀ ਲੋਗਿਨ ਹੋ!"
+    logout_to_signup: "ਨਵੇ ਕਾਰਯਕਾਰੀ ਬਨਣ ਵਾਸਤੇ ਪਿਹਲਾ ਲੋਗੌਟ ਕਰੋ ਜੀ!"
+    invalid_credentials: "ਤੁਹਾਡਾ ਨਾਮ ਜ਼ਾ ਪਾਸਵਰ੍ਡ ਗਲਤ ਹੈਂ"

@@ -1,0 +1,20 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  title:
+    header: "Untitled"
+    description:  "This is cybersecure website"
+
+  welcome:
+    header: "Welcome"
+    text: "Thank you for visiting our page"
+
+  flash:
+    logged_in:  "Successfully logged in!"
+    logged_out:  "Successfully logged out!"
+    signed_up:  "Successfully signed up!"
+    already_login:  "You are already logged in!"
+    logout_to_signup: "Please logout to sign up as new user"
+    invalid_credentials: "Invalid username or password"
+

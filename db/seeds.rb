@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+#
+
+c = ClientApplication.new
+c.app_id = "abc123"
+c.app_secret = "def123"
+c.save

@@ -1,16 +1,9 @@
 class OauthController < ApplicationController
   def authorize
-    response = Hash.new
-    begin
-      request = AuthorizationRequest.new(params.except(:action,:controller,:other_key))
-    rescue => exception
-      response[:error] = exception.to_s
-      response[:state] = params[:state] unless params[:state].nil?
-      render :json => response.to_json
-      return
-    end
-    response = request.generate_response
-    render :json => response.to_json
+    auth_request = AuthorizationRequest.new(params.except(:action,:controller,:other_key))
+    response_hash = auth_request.validate_request
+    auth_request.save
+    render :json => response_hash.to_json
   end
 
   def access_token

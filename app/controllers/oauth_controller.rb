@@ -1,9 +1,53 @@
 class OauthController < ApplicationController
-  def authorize
+  
+  def auth_token
     auth_request = AuthorizationRequest.new(params.except(:action,:controller,:other_key))
-    response_hash = auth_request.validate_request
-    auth_request.save
-    render :json => response_hash.to_json
+    if auth_request.valid_request?
+      if current_user.nil?
+        redirect_to login_path(auth_request.id)
+      else
+        redirect_to authorise_app_path(auth_request.id) 
+      end
+    else
+      render :json => auth_request.response
+    end
+  end
+
+  def show_authorisation_dialog
+    auth_id = params[:auth_request_id]
+    unless auth_id.nil?
+      if current_user
+        @auth_request = AuthorizationRequest.find(auth_id)
+        if @auth_request
+          render :authorise_app
+        else
+          raise 'invalid authorization request'
+        end
+      else
+        redirect_to login_path(auth_id)
+      end
+    else
+      raise 'No authorization request specified'
+    end
+  end
+
+  def authorise_app
+    auth_id = params[:auth_request_id]
+    unless auth_id.nil?
+      if current_user
+        @auth_request = AuthorizationRequest.find(auth_id)
+        if @auth_request
+          @auth_request.generate_code
+          render :json => @auth_request.response
+        else
+          raise 'invalid authorization request'
+        end
+      else
+        redirect_to login_path(auth_id)
+      end
+    else
+      raise 'No authorization request specified'
+    end
   end
 
   def access_token

@@ -3,6 +3,7 @@ class CreateAuthorizationRequests < ActiveRecord::Migration
     create_table :authorization_requests do |t|
       t.string :response_type
       t.string :client_application_id
+      t.integer :user_id
       t.string :redirect_uri
       t.string :scope
       t.string :state

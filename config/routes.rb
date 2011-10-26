@@ -2,11 +2,15 @@ Server::Application.routes.draw do
   root :to => 'welcome#index'
 
   match 'signup' => 'users#new', :as => :signup
-
   match 'logout' => 'sessions#destroy', :as => :logout
+  
+  match 'login(/auth_request/:auth_request_id)' => 'sessions#new', :as => :login
+  
+  match 'auth_token' => 'oauth#auth_token' 
+  match 'access_token' => 'oauth#access_token'
 
-  match 'login' => 'sessions#new', :as => :login
-  match 'auth' => 'oauth#authorize'
+  get 'authorise_app/auth_request/:auth_request_id' => 'oauth#show_authorisation_dialog', :as => :authorise_app
+  post 'authorise_app/auth_request/:auth_request_id' => 'oauth#authorise_app', :as => :authorise_app
 
   resources :password_resets
 

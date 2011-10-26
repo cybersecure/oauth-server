@@ -11,11 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110926041429) do
+ActiveRecord::Schema.define(:version => 20110926052303) do
+
+  create_table "access_requests", :force => true do |t|
+    t.integer  "authorization_request_id"
+    t.string   "grant_type"
+    t.string   "redirect_uri"
+    t.string   "access_token"
+    t.string   "token_type"
+    t.integer  "expires_in"
+    t.string   "state"
+    t.string   "refresh_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "authorization_requests", :force => true do |t|
     t.string   "response_type"
     t.string   "client_application_id"
+    t.integer  "user_id"
     t.string   "redirect_uri"
     t.string   "scope"
     t.string   "state"

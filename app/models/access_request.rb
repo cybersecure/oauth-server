@@ -1,4 +1,4 @@
-class AccessRequest < ActiveRecord::Base
+class AccessRequest < Hashable
   belongs_to  :authorization_request
   
   attr_accessor :code

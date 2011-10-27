@@ -9,17 +9,33 @@ class OauthController < ApplicationController
         redirect_to authorise_app_path(auth_request.id) 
       end
     else
-      render :json => auth_request.response
+      send_results(auth_request)
     end
   end
 
   def show_authorisation_dialog
     auth_id = params[:auth_request_id]
+    handle_auth_request auth_id do
+      @auth_request.user = current_user
+      @auth_request.save
+      render 'auth_dialog'
+    end
+  end
+
+  def authorise_app
+    auth_id = params[:auth_request_id]
+    handle_auth_request auth_id do
+      @auth_request.approve
+      send_results(@auth_request)
+    end
+  end
+
+  def handle_auth_request(auth_id)
     unless auth_id.nil?
       if current_user
         @auth_request = AuthorizationRequest.find(auth_id)
         if @auth_request
-          render :authorise_app
+          yield
         else
           raise 'invalid authorization request'
         end
@@ -31,23 +47,8 @@ class OauthController < ApplicationController
     end
   end
 
-  def authorise_app
-    auth_id = params[:auth_request_id]
-    unless auth_id.nil?
-      if current_user
-        @auth_request = AuthorizationRequest.find(auth_id)
-        if @auth_request
-          @auth_request.generate_code
-          render :json => @auth_request.response
-        else
-          raise 'invalid authorization request'
-        end
-      else
-        redirect_to login_path(auth_id)
-      end
-    else
-      raise 'No authorization request specified'
-    end
+  def send_results(auth_request)
+    redirect_to auth_request.redirect_request_uri
   end
 
   def access_token

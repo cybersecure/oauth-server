@@ -1,0 +1,9 @@
+<%= title t('welcome.header') %>
+<%= @auth_request.client_application.client_url %>
+<%= @auth_request.client_application.client_name %>
+
+<p>
+  <%= @auth_request.client_application.description %>
+</p>
+
+<%= link_to "Authorise App", authorise_app_path(@auth_request.id), :method => :post %>

@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include HashModule
   has_secure_password
 
   attr_accessible :username, :email, :password, :password_confirmation, :language
@@ -7,10 +8,10 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username
 
   before_create { generate_token(:auth_token) }
-
+  
   def generate_token(column)
     begin
-    self[column] = SecureRandom.urlsafe_base64
+      self[column] = HashModule::SecureToken.generate_token
     end while User.exists?(column => self[column])
   end
 

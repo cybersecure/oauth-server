@@ -16,6 +16,5 @@
     <%= check_box_tag :remember_me, 1, params[:remember_me] %>
     <%= label_tag :remember_me %>
   </p>
-  <%= hidden_field_tag :auth_request_id, @auth_request %>
   <p class="button"><%= submit_tag "Login" %></p>
 <% end %>

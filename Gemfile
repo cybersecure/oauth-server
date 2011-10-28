@@ -18,3 +18,4 @@ gem "rspec-rails", :group => [:test, :development]
 gem "bcrypt-ruby", :require => "bcrypt"
 
 gem "unicorn"
+gem "addressable"

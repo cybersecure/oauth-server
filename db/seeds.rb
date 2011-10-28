@@ -8,6 +8,9 @@
 #
 
 c = ClientApplication.new
-c.app_id = "abc123"
-c.app_secret = "def123"
+c.client_id = "abc123"
+c.client_secret = "def123"
+c.client_url = "http://storage1:3001"
+c.description = "Something interesting"
+c.client_name = "TestApp1"
 c.save
